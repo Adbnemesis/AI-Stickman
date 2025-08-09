@@ -1,16 +1,40 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Space Shooter Hand Tracking Game</title>
-    <link rel="stylesheet" href="style.css" />
+  <meta charset="utf-8" />
+  <title>Stickman — Final (MediaPipe Hands, Calibrated, No-freeze)</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <canvas id="gameCanvas"></canvas>
-    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js"></script>
-    <script src="script.js"></script>
+  <div id="uiRoot">
+    <div id="overlayUI">
+      <div id="scoreBox">Score: <span id="score">0</span></div>
+      <div id="livesBox">Lives: <span id="lives">3</span></div>
+      <div id="bossTimerBox">Boss in: <span id="bossTimer">-</span>s</div>
+      <div id="shieldBox">Shield: <span id="shieldStatus">Ready</span></div>
+    </div>
+
+    <div id="controls">
+      <button id="howBtn">How to Play</button>
+      <button id="leaderBtn">Leaderboard</button>
+      <button id="muteBtn">Mute</button>
+      <button id="startBtn">Start (Calibrate)</button>
+      <label class="small"><input id="debugToggle" type="checkbox"> Debug</label>
+    </div>
+
+    <div id="bossWarningBanner" hidden>⚠️ BOSS INCOMING — Prepare! ⚠️</div>
+
+    <!-- hidden video used by MediaPipe camera (kept in DOM so camera stream stays alive) -->
+    <video id="camPreview" playsinline style="display:none;"></video>
+
+    <canvas id="gameCanvas" width="1280" height="720" aria-label="Stickman game canvas"></canvas>
+  </div>
+
+  <!-- MediaPipe Hands + Camera utils -->
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
+
+  <script defer src="game.js"></script>
 </body>
 </html>
